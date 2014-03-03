@@ -2,11 +2,19 @@ urxvt*foreground: white
 urxvt*background: black
 urxvt*scrollBar: false
 urxvt*iso14755: false
-urxvt*font: xft:Inconsolata for Powerline for Powerline:pixelsize=14
+urxvt*font: xft:DejaVu Sans Mono for Powerline for  Powerline:pixelsize=12
 urxvt*colorIT: #87af5f
 urxvt*colorBD: #d7d7d7
 urxvt*colorUL: #87afd7
-urxvt*internalBorder: 0
+! urxvt*internalBorder: 0
+
+Xft*dpi: 96
+Xft*hinting: 1
+Xft*hintstyle: hintfull
+Xft*antialias: 1
+Xft*rgba: rgb
+Xft*autohint: 0
+Xft*lcdfilter: lcddefault
 
 *color0:  #2E3436
 *color1:  #a40000
@@ -25,8 +33,39 @@ urxvt*internalBorder: 0
 *color14: #fcaf3e
 *color15: #EEEEEC
 
+*color24:  #076678
+*color66:  #427b58
+*color88:  #9d0006
+*color96:  #8f3f71
+*color100: #79740e
+*color108: #8ec07c
+*color109: #83a598
+*color130: #af3a03
+*color136: #b57614
+*color142: #b8bb26
+*color167: #fb4934
+*color175: #d3869b
+*color208: #fe8019
+*color214: #fabd2f
+*color223: #ebdbb2
+*color228: #f4e8ba
+*color229: #fdf4c1
+*color230: #ffffc8
+*color234: #1d2021
+*color235: #282828
+*color236: #32302f
+*color237: #3c3836
+*color239: #504945
+*color241: #665c54
+*color243: #7c6f64
+*color244: #928374
+*color245: #928374
+*color246: #a89984
+*color248: #bdae93
+*color250: #d5c4a1
+
 ! Nasty hack to act more like XTerm
-! *URxvt*termName:		xterm-256color
+*URxvt*termName:		xterm-256color
 
 ! Normal
 *URxvt*keysym.Home:		\033OH
