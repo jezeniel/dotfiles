@@ -8,7 +8,7 @@ keycode 37 = Mode_switch NoSymbol Mode_switch
 keycode 66 = Control_L NoSymbol Control_L
 
 !Swap Escape for tilde useful for vim.
-keycode 49 = Escape asciitilde Escape asciitilde
+keycode 49 = Escape asciitilde grave asciitilde grave
 keycode 9  = grave asciitilde grave asciitilde
 
 

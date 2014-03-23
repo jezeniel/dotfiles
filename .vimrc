@@ -21,6 +21,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'zeis/vim-kolor'
 Bundle 'morhetz/gruvbox'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'sjl/gundo.vim'
 "Bundle 'bling/vim-airline'
 
 filetype plugin indent on " required
@@ -41,15 +42,28 @@ map <C-n>  <Plug>NERDTreeTabsToggle<CR>
 map <leader>ln :setlocal number!<CR>
 map <leader>gg :GitGutterToggle<CR>
 map <leader>ng :IndentGuidesToggle<CR>
+map <leader>gt :tabm +1<CR>
+map <leader>gT :tabm -1<CR>
+nnoremap <F5> :GundoToggle<CR>
+nnoremap <F2> :tabm -1<CR>
+nnoremap <F3> :tabm +1<CR>
 
 " color config
-let g:kolor_italic = 1
-let g:kolor_bold = 1
-let g:kolor_underline = 0
-let g:kolor_alternative_matchparen = 0
+" let g:kolor_italic = 1
+" let g:kolor_bold = 1
+" let g:kolor_underline = 0
+" let g:kolor_alternative_matchparen = 0
 "gruvbox config
+if has('gui_running') || &term == "xterm-256colors"
+  let g:gruvbox_italic = 1
+else
+  let g:gruvbox_italic = 0
+endif
+let g:gruvbox_invert_selection = 0
+let g:gruvbox_contrast = 'hard'
+
 set bg=dark
-colorscheme kolor
+colorscheme gruvbox
 
 highlight CursorLine cterm=bold
 set colorcolumn=80
@@ -61,13 +75,13 @@ set number
 set lbr
 set tw=500
 
-" Use spaces instead of tabs
-set expandtab
-
 " 1 tab == 2 spaces
 set smarttab
 set tabstop=2
 set shiftwidth=2
+
+" Use spaces instead of tabs
+set expandtab
 
 set ai " Auto indent
 set si " Smart indent
@@ -115,10 +129,12 @@ let g:NERDTreeIgnore = ['\.pyc$']
 
 let g:Powerline_symbols = 'fancy'
 
-"GUI
+"Remove GVIM GUI
 set guioptions-=m
 set guioptions-=T
-set guioptions+=LlRrb
-set guioptions-=LlRrb
+set guioptions-=r
+set guioptions-=L
+set guioptions-=e
+set guifont=Inconsolata\ 10
 
 autocmd BufNewFile,BufRead *.quicktask setf quicktask
