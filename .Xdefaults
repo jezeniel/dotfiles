@@ -2,7 +2,7 @@ urxvt*foreground: white
 urxvt*background: black
 urxvt*scrollBar: false
 urxvt*iso14755: false
-urxvt*font: xft:DejaVu Sans Mono for Powerline for  Powerline:pixelsize=12
+urxvt*font: xft:DeJaVu Sans Mono for Powerline:pixelsize=12
 urxvt*colorIT: #87af5f
 urxvt*colorBD: #d7d7d7
 urxvt*colorUL: #87afd7

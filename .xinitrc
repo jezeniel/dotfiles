@@ -3,12 +3,12 @@ xset fp rehash
 conky &
 sh ./.fehbg &
 
-if [ -s ~/.Xmodmap ]; then
-  xmodmap ~/.Xmodmap
+if [ -s "$HOME/.xmodmaprc" ]; then
+  xmodmap "$HOME/.xmodmaprc"
 fi
 
 if [ -z $WM]; then
   WM=dwm
 fi
 
-exec $WM 
+exec dbus-launch $WM 

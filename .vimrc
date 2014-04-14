@@ -22,7 +22,8 @@ Bundle 'zeis/vim-kolor'
 Bundle 'morhetz/gruvbox'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'sjl/gundo.vim'
-"Bundle 'bling/vim-airline'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'bling/vim-airline'
 
 filetype plugin indent on " required
 
@@ -42,28 +43,36 @@ map <C-n>  <Plug>NERDTreeTabsToggle<CR>
 map <leader>ln :setlocal number!<CR>
 map <leader>gg :GitGutterToggle<CR>
 map <leader>ng :IndentGuidesToggle<CR>
-map <leader>gt :tabm +1<CR>
-map <leader>gT :tabm -1<CR>
+map <leader>nw :set wrap!<CR>
 nnoremap <F5> :GundoToggle<CR>
 nnoremap <F2> :tabm -1<CR>
 nnoremap <F3> :tabm +1<CR>
 
-" color config
+"GitGutter
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+" kolor config
 " let g:kolor_italic = 1
 " let g:kolor_bold = 1
 " let g:kolor_underline = 0
 " let g:kolor_alternative_matchparen = 0
+
 "gruvbox config
-if has('gui_running') || &term == "xterm-256colors"
+if has('gui_running') || &term == "xterm-256color" || &term == "rxvt-unicode-256color"
   let g:gruvbox_italic = 1
 else
   let g:gruvbox_italic = 0
 endif
 let g:gruvbox_invert_selection = 0
 let g:gruvbox_contrast = 'hard'
-
 set bg=dark
 colorscheme gruvbox
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 
 highlight CursorLine cterm=bold
 set colorcolumn=80
@@ -122,12 +131,19 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-let g:nerdtree_tabs_open_on_console_startup = 1
+if len(argv()) > 0
+  let g:nerdtree_tabs_open_on_console_startup = 0
+else
+  let g:nerdtree_tabs_open_on_console_startup = 1
+endif
+
 let g:nerdtree_tabs_focus_on_files = 0
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$']
 
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
+let g:syntastic_javascript_checkers = ['jshint']
+let g:gitgutter_map_keys = 1
 
 "Remove GVIM GUI
 set guioptions-=m

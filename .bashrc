@@ -106,24 +106,40 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+export PATH="/home/jezeniel/Software/bin:$PATH"
+
 # VIM COLOR Configuration
 export TERM="xterm-256color"
-alias vim='TERM=screen-256color vim'
+
+if [ -n "$TMUX" ]; then
+  alias vim="TERM=screen-256color vim"
+else
+  alias vim="TERM=rxvt-unicode-256color vim"
+fi
+
+export EDITOR="vim"
+
+
+# Custom prompt
+function last_two_dirs {
+ pwd |rev| awk -F / '{print $1,$2}' | rev | sed s_\ _/_ 
+}
+
+export newPWD="$(echo -n '\[\e[1;31m\]\H\[\e[0m\]:\[\e[1;34m\]$(last_two_dirs)\n-> \[\e[0m\]')"
+export PS1="$(eval 'echo ${newPWD}')"
 
 # Used for gruvbox custom color
 if [ -n "$DISPLAY" ]; then
   source ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
 fi
 
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-export LESS=' -R '
-
-export PATH="/home/jezeniel/Software/bin:$PATH"
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.gem/ruby/2.1.0/bin #  RUBY 
 
 # For virtual env
 venv() {
@@ -134,5 +150,17 @@ venv() {
     echo "Error: Not found: $activate"
   fi
 }
+
+develop() {
+  local develop=~/bin/develop
+  local dir=~/Development/$1
+  if [ -e "$dir" ] ; then
+    source $develop $1
+  else
+    echo "Error: Not found: $dir"
+  fi
+}
+
+source ~/.bin/tmuxinator.bash
 
 archey

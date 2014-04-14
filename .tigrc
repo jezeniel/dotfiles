@@ -1,0 +1,3 @@
+set show-id = yes
+set show-date = relative
+set line-graphics = utf-8
