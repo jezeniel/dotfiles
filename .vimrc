@@ -16,7 +16,6 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'gregsexton/MatchTag'
 Bundle 'aaronbieber/quicktask'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'zeis/vim-kolor'
 Bundle 'morhetz/gruvbox'
@@ -24,6 +23,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'sjl/gundo.vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on " required
 
@@ -33,6 +33,9 @@ syntax on
 set history=700
 set autoread
 set noshowmode
+
+" Turn of wordwrap by default
+set nowrap
 
 " custom key mappings
 let mapleader = ";"
@@ -48,6 +51,19 @@ nnoremap <F5> :GundoToggle<CR>
 nnoremap <F2> :tabm -1<CR>
 nnoremap <F3> :tabm +1<CR>
 
+" Tab management
+map <leader>tn :tabnew<CR>
+
+" Window movements
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
+" scroll-smooth
+" map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+" map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+
 "GitGutter
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
@@ -57,22 +73,29 @@ nmap [h <Plug>GitGutterPrevHunk
 " let g:kolor_bold = 1
 " let g:kolor_underline = 0
 " let g:kolor_alternative_matchparen = 0
+" colorscheme kolor
 
 "gruvbox config
-if has('gui_running') || &term == "xterm-256color" || &term == "rxvt-unicode-256color"
-  let g:gruvbox_italic = 1
-else
-  let g:gruvbox_italic = 0
-endif
-let g:gruvbox_invert_selection = 0
-let g:gruvbox_contrast = 'hard'
+" if has('gui_running') || &term == "xterm-256color" || &term == "rxvt-unicode-256color"
+"   let g:gruvbox_italic = 1
+" else
+"   let g:gruvbox_italic = 0
+" endif
+" let g:gruvbox_invert_selection = 0
+" let g:gruvbox_contrast = 'hard'
+" set bg=dark
+" colorscheme gruvbox
+
 set bg=dark
-colorscheme gruvbox
+colorscheme solarized
+let g:solarized_termcolors=256
 
 " airline
+let g:airline_theme="solarized"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
+set laststatus=2
 
 highlight CursorLine cterm=bold
 set colorcolumn=80
@@ -94,7 +117,7 @@ set expandtab
 
 set ai " Auto indent
 set si " Smart indent
-set wrap " Wrap lines
+
 
 set wildmenu
 set wildignore=*.o,*~,*.pyc
@@ -107,6 +130,7 @@ endif
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
+" Disable backup
 set nobackup
 set nowb
 set noswapfile
@@ -138,6 +162,7 @@ else
 endif
 
 let g:nerdtree_tabs_focus_on_files = 0
+let g:nerdtree_tabs_meaningful_tab_names = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$']
 

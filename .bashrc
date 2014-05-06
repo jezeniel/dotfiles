@@ -13,7 +13,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
+HISTSIZE=10000
 HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
@@ -117,11 +117,10 @@ export TERM="xterm-256color"
 if [ -n "$TMUX" ]; then
   alias vim="TERM=screen-256color vim"
 else
-  alias vim="TERM=rxvt-unicode-256color vim"
+  alias vim="TERM=xterm-256color vim"
 fi
 
 export EDITOR="vim"
-
 
 # Custom prompt
 function last_two_dirs {
@@ -132,9 +131,9 @@ export newPWD="$(echo -n '\[\e[1;31m\]\H\[\e[0m\]:\[\e[1;34m\]$(last_two_dirs)\n
 export PS1="$(eval 'echo ${newPWD}')"
 
 # Used for gruvbox custom color
-if [ -n "$DISPLAY" ]; then
-  source ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
-fi
+# if [ -n "$DISPLAY" ]; then
+#   source ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
+# fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -162,5 +161,9 @@ develop() {
 }
 
 source ~/.bin/tmuxinator.bash
+
+# For android dev
+export JAVA_HOME="/opt/java6"
+PATH="$PATH:/opt/android-sdk/tools/:/opt/android-sdk/platform-tools/"
 
 archey
