@@ -1,0 +1,50 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 1.0
+total_run_times 0
+use_spacer none
+
+TEXT
+^tw()
+${if_existing /sys/class/power_supply/ACAD/online 0}\
+${if_match ${battery_percent BAT1} > 10}\
+^i(/home/jezeniel/.dzen2/bat_full.xbm) ^fg(\#00ff00)${battery_percent BAT1}%^fg() | \
+${else}\
+^i(/home/jezeniel/.dzen2/bat_low.xbm) ^fg(\#ff0000)${blink ${battery_percent BAT1}%}^fg() | \
+${endif}\
+${else}\
+^i(/home/jezeniel/.dzen2/ac_01.xbm) ^fg(\#00ff00)${battery_percent BAT1}%^fg() | \
+${endif}\
+${if_match ${cpu} < 90}\
+^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#00ff00)${cpu}%^fg() | \
+${else}\
+^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#ff0000)${cpu}%^fg() | \
+${endif}\
+\
+${if_match ${memperc} < 90}\
+^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#00ff00)${memperc}%^fg() |\
+${else}\
+^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#ff0000)${memperc}%^fg() |\
+${endif}\
+ \
+${if_up wlp9s0}\
+${if_match ${wireless_link_qual_perc wlp9s0} == 100}\
+^i(/home/jezeniel/.dzen2/wireless5.xbm)\
+${else}${if_match ${wireless_link_qual_perc wlp9s0} >= 80}\
+^i(/home/jezeniel/.dzen2/wireless4.xbm)\
+${else}${if_match ${wireless_link_qual_perc wlp9s0} >= 60}\
+^i(/home/jezeniel/.dzen2/wireless3.xbm)\
+${else}${if_match ${wireless_link_qual_perc wlp9s0} >= 40}\
+^i(/home/jezeniel/.dzen2/wireless2.xbm)\
+${else}${if_match ${wireless_link_qual_perc wlp9s0} >= 20}\
+^i(/home/jezeniel/.dzen2/wireless1.xbm)\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+${else}\
+^i(/home/jezeniel/.dzen2/net_wired.xbm)\
+${endif}\
+ | ${time %b.%d.%Y %a} | ^i(/home/jezeniel/.dzen2/clock.xbm) ${time %I:%M %P}
