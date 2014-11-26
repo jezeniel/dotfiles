@@ -34,6 +34,10 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'tpope/vim-eunuch'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'xolox/vim-session'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
@@ -86,7 +90,6 @@ map <leader>tn :tabnew<CR>
 "GitGutter
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
-
 " Unite
 if executable('ack')
   " Use ack in unite grep source.
@@ -105,21 +108,12 @@ nnoremap <leader>/ :<C-u>Unite grep:.<CR>
 " colorscheme kolor
 
 "gruvbox config
-" let g:gruvbox_italic = 0
-" let g:gruvbox_italicize_comments = 0
-" let g:gruvbox_invert_selection = 0
-" let g:gruvbox_contrast = 'hard'
+let g:gruvbox_italic = 0
+let g:gruvbox_italicize_comments = 0
+let g:gruvbox_invert_selection = 0
+let g:gruvbox_contrast = 'hard'
 set bg=dark
-colorscheme solarized
-
-if has('gui_running')
-  set bg=light
-else
-  set bg=dark
-endif
-
-" colorscheme solarized
-let g:solarized_termcolors=256
+colorscheme gruvbox
 
 " airline
 " let g:airline_theme="gruvbox"
@@ -189,6 +183,9 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 " let g:Powerline_symbols = 'fancy'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:gitgutter_map_keys = 1
+
+" vim-session
+let g:session_autosave='no'
 
 "Remove GVIM GUI
 set guioptions-=m
