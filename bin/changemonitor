@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [ -z $1 ]; then
+  PRIMARY=VGA1
+fi
+
+if [ -z $2 ]; then
+  SECONDARY=LVDS1
+fi
+
+xrandr --output $PRIMARY --primary --auto --output $SECONDARY --off

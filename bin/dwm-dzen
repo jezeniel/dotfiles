@@ -1,0 +1,8 @@
+#!/usr/bin/zsh
+
+WIDTH=400
+let "X=$1-WIDTH"
+FG='#aaaaaa'
+BG='#1a1a1a'
+FONT='-*-terminus-*-r-normal-*-*-90-*-*-*-*-iso8859-*'
+conky -c /home/jezeniel/.dzenconkyrc | dzen2 -e - -h '14' -w $WIDTH -x $X -ta c -fg $FG -bg $BG -fn $FONT &
