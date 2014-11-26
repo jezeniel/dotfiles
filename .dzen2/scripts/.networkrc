@@ -1,0 +1,13 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 1.0
+total_run_times 0
+use_spacer none
+
+TEXT
+^tw()Network
+ ip(wlp9s0) : ${addr wlp9s0}
+ essid      : ${wireless_essid wlp9s0}
+ ^i($HOME/.dzen2/net_up_03.xbm) ${upspeed wlp9s0} 
+ ^i($HOME/.dzen2/net_down_03.xbm) ${downspeed wlp9s0}
