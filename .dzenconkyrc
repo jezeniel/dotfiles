@@ -1,5 +1,7 @@
 background no
 out_to_console yes
+own_window yes
+double_buffer yes
 out_to_x no
 update_interval 1.0
 total_run_times 0
@@ -7,27 +9,47 @@ use_spacer none
 
 TEXT
 ^tw()
-${if_existing /sys/class/power_supply/ACAD/online 0}\
-${if_match ${battery_percent BAT1} > 10}\
-^i(/home/jezeniel/.dzen2/bat_full.xbm) ^fg(\#00ff00)${battery_percent BAT1}%^fg() | \
-${else}\
-^i(/home/jezeniel/.dzen2/bat_low.xbm) ^fg(\#ff0000)${blink ${battery_percent BAT1}%}^fg() | \
+${if_match ${battery_percent BAT1} >= 90}\
+^i(/home/jezeniel/.dzen2/battery90.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 80}\
+^i(/home/jezeniel/.dzen2/battery80.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 70}\
+^i(/home/jezeniel/.dzen2/battery70.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 60}\
+^i(/home/jezeniel/.dzen2/battery60.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 50}\
+^i(/home/jezeniel/.dzen2/battery50.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 40}\
+^i(/home/jezeniel/.dzen2/battery40.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 30}\
+^i(/home/jezeniel/.dzen2/battery30.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 10}\
+^i(/home/jezeniel/.dzen2/battery20.xbm) ^fg(\#6FA35B)${battery_percent BAT1}^fg()\
+${else}${if_match ${battery_percent BAT1} >= 0}\
+^fg(\#c2453c)^i(/home/jezeniel/.dzen2/battery10.xbm) ${battery_percent BAT1}^fg()\
 ${endif}\
-${else}\
-^i(/home/jezeniel/.dzen2/ac_01.xbm) ^fg(\#00ff00)${battery_percent BAT1}%^fg() | \
 ${endif}\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+${endif}\
+ | \
 ${if_match ${cpu} < 90}\
-^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#00ff00)${cpu}%^fg() | \
+^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#6FA35B)${cpu}^fg() | \
 ${else}\
-^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#ff0000)${cpu}%^fg() | \
+^i(/home/jezeniel/.dzen2/cpu.xbm) ^fg(\#c2453c)${cpu}^fg() | \
 ${endif}\
 \
 ${if_match ${memperc} < 90}\
-^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#00ff00)${memperc}%^fg() |\
+^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#6FA35B)${memperc}^fg() |\
 ${else}\
-^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#ff0000)${memperc}%^fg() |\
+^i(/home/jezeniel/.dzen2/mem.xbm) ^fg(\#c2453c)${memperc}^fg() |\
 ${endif}\
  \
+^ca(1, $HOME/.dzen2/scripts/network_popup.sh)\
 ${if_up wlp9s0}\
 ${if_match ${wireless_link_qual_perc wlp9s0} == 100}\
 ^i(/home/jezeniel/.dzen2/wireless5.xbm)\
@@ -47,4 +69,6 @@ ${endif}\
 ${else}\
 ^i(/home/jezeniel/.dzen2/net_wired.xbm)\
 ${endif}\
- | ${time %b.%d.%Y %a} | ^i(/home/jezeniel/.dzen2/clock.xbm) ${time %I:%M %P}
+^ca()\
+ | ^ca(1, /home/jezeniel/.dzen2/scripts/calendar_popup.sh)^i($HOME/.dzen2/clock.xbm) ${time %a %d %b} ^fg(\#c9a35d)${time %R}^fg()^ca()\
+ | ^ca(1, $HOME/.dzen2/scripts/sysinfo_popup.sh)^fg(\#0086cf)^i($HOME/.dzen2/arch.xbm)^fg() jezeniel^ca()
