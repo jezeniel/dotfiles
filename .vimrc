@@ -1,58 +1,42 @@
-autocmd!
+call plug#begin('~/.vim/plugged')
 
-" NeoBundle Start
-if has('vim_starting')
-  set nocompatible " Be iMproved
+" Themes
+Plug 'morhetz/gruvbox'
+Plug 'zeis/vim-kolor'
+Plug 'whatyouhide/vim-gotham'
 
-  " required
-  set runtimepath+=~/.vim/bundle/neobundle.vim/ 
-endif
+" Syntax
+Plug 'chaimleib/vim-renpy'
+Plug 'plasticboy/vim-markdown'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'digitaltoad/vim-jade'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'fatih/vim-go'
+Plug 'mitsuhiko/vim-python-combined'
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+" Productivity
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'gregsexton/MatchTag'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-eunuch'
+Plug 'kien/ctrlp.vim'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-" required
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'gmarik/vundle'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'gregsexton/MatchTag'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'zeis/vim-kolor'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'ekalinin/Dockerfile.vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'xolox/vim-session'
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'whatyouhide/vim-gotham'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-call neobundle#end()
-
-filetype plugin indent on " required
-
-" NeoBundle end
+call plug#end()
 
 syntax on
 set history=700
@@ -72,6 +56,7 @@ map <leader>gg :GitGutterToggle<CR>
 map <leader>ng :IndentGuidesToggle<CR>
 map <leader>nw :set wrap!<CR>
 map <C-n> <Plug>NERDTreeTabsToggle<CR>
+map <C-b> :CtrlPBuffer<CR>
 nnoremap <F2> :tabm -1<CR>
 nnoremap <F3> :tabm +1<CR>
 
@@ -79,7 +64,7 @@ nnoremap <F3> :tabm +1<CR>
 let g:nerdtree_tabs_focus_on_files = 0
 let g:nerdtree_tabs_meaningful_tab_names = 1
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeIgnore = ['\.pyc$']
+let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
@@ -100,13 +85,6 @@ if executable('ack')
 endif
 nnoremap <leader>/ :<C-u>Unite grep:.<CR>
 
-" kolor config
-" let g:kolor_italic = 1
-" let g:kolor_bold = 1
-" let g:kolor_underline = 0
-" let g:kolor_alternative_matchparen = 0
-" colorscheme kolor
-
 "gruvbox config
 let g:gruvbox_italic = 0
 let g:gruvbox_italicize_comments = 0
@@ -121,6 +99,9 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 set laststatus=2
+
+" markdown
+let g:vim_markdown_folding_disabled=1
 
 highlight CursorLine cterm=bold
 set colorcolumn=80
@@ -142,7 +123,6 @@ set expandtab
 
 set ai " Auto indent
 " set si " Smart indent
-
 
 set wildmenu
 set wildignore=*.o,*~,*.pyc
@@ -193,14 +173,8 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 set guioptions-=e
-set guifont=Inconsolata\ 10
+set guifont=Inconsolata\ 12
 
 " Vertical diff
 set diffopt+=vertical
 
-" Auto reload when modified .vimrc
-
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-  autocmd bufwritepost .vimrc AirlineRefresh
-endif
