@@ -1,3 +1,4 @@
+set encoding=utf-8
 call plug#begin('~/.vim/plugged')
 
 " Themes
@@ -7,34 +8,33 @@ Plug 'whatyouhide/vim-gotham'
 
 " Syntax
 Plug 'chaimleib/vim-renpy'
-Plug 'plasticboy/vim-markdown'
-Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
 Plug 'digitaltoad/vim-jade'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go'
+Plug 'kchmck/vim-coffee-script'
 Plug 'mitsuhiko/vim-python-combined'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
 
 " Productivity
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'gregsexton/MatchTag'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
-Plug 'altercation/vim-colors-solarized'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-eunuch'
-Plug 'kien/ctrlp.vim'
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+Plug 'gregsexton/MatchTag'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'junegunn/goyo.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -53,8 +53,8 @@ map <leader>ss :setlocal spell!<CR>
 map <leader>cl :set cursorline!<CR>
 map <leader>ln :setlocal number!<CR>
 map <leader>gg :GitGutterToggle<CR>
-map <leader>ng :IndentGuidesToggle<CR>
-map <leader>nw :set wrap!<CR>
+map <leader>w :set wrap!<CR>
+map <leader>z  :Goyo<CR>
 map <C-n> <Plug>NERDTreeTabsToggle<CR>
 map <C-b> :CtrlPBuffer<CR>
 nnoremap <F2> :tabm -1<CR>
@@ -66,15 +66,48 @@ let g:nerdtree_tabs_meaningful_tab_names = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
 
+" Goyo
+function s:goyo_enter()
+  silent !tmux set status off
+  call s:gruvboxFix()
+  NERDTreeSteppedClose
+  LeadingSpaceDisable
+endfunction
+
+function s:goyo_leave()
+  silent !tmux set status on
+  call s:gruvboxFix()
+  LeadingSpaceEnable
+endfunction
+
+autocmd User GoyoEnter nested call <SID>goyo_enter()
+autocmd User GoyoLeave nested call <SID>goyo_leave()
+
+" indentLine
+let g:indentLine_enabled = 0
+let g:indentLine_leadingSpaceChar = '·'
+let g:indentLine_leadingSpaceEnabled = 1
+set lcs=eol:¬,tab:»·,trail:·
+set list
+
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
 
 " Tab management
 map <leader>tn :tabnew<CR>
 
-"GitGutter
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+" GitGutter
+nmap gh <Plug>GitGutterNextHunk
+nmap gH <Plug>GitGutterPrevHunk
+let g:gitgutter_sign_removed = "-"
+
+" Easymotion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-s)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+
 " Unite
 if executable('ack')
   " Use ack in unite grep source.
@@ -85,13 +118,22 @@ if executable('ack')
 endif
 nnoremap <leader>/ :<C-u>Unite grep:.<CR>
 
-"gruvbox config
-let g:gruvbox_italic = 0
-let g:gruvbox_italicize_comments = 0
+" gruvbox
+function s:gruvboxFix()
+  hi GitGutterAdd          ctermbg=235
+  hi GitGutterChange       ctermbg=235
+  hi GitGutterDelete       ctermbg=235
+  hi GitGutterChangeDelete ctermbg=235
+  hi SignatureMarkText     ctermbg=235
+endfunction
+
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_comments = 1
 let g:gruvbox_invert_selection = 0
-let g:gruvbox_contrast = 'hard'
+let g:gruvbox_contrast = 'normal'
 set bg=dark
 colorscheme gruvbox
+call s:gruvboxFix()
 
 " airline
 " let g:airline_theme="gruvbox"
@@ -152,16 +194,9 @@ set incsearch
 set ruler
 set magic
 
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 " let g:Powerline_symbols = 'fancy'
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers = ['flake8']
 let g:gitgutter_map_keys = 1
 
 " vim-session
