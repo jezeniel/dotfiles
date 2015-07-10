@@ -1,10 +1,10 @@
 [options]
-font = Fira Code 11
+font = Fira Code 10
 
 [colors]
 # hard contrast: background = #1d2021
 # soft contrast: background = #32302f
-background = rgba(40, 40, 40, 0.95)
+background = rgba(40, 40, 40, 0.85)
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
 
