@@ -1,3 +1,2 @@
-set show-id = yes
-set show-date = relative
+set main-view = id:yes,color date:short author:full commit-title:yes,graph=v2
 set line-graphics = utf-8
