@@ -1,10 +1,12 @@
 [options]
-font = Fira Code 10
+font = Hack 10
 
 [colors]
+
 # hard contrast: background = #1d2021
 # soft contrast: background = #32302f
-background = rgba(40, 40, 40, 0.85)
+# medium contrast: background = #282828
+background = rgba(29, 32, 31, 0.95)
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
 
