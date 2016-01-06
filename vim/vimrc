@@ -5,19 +5,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'zeis/vim-kolor'
 Plug 'whatyouhide/vim-gotham'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " Syntax
-Plug 'chaimleib/vim-renpy'
-Plug 'digitaltoad/vim-jade'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'fatih/vim-go'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mitsuhiko/vim-python-combined'
-Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown'
-Plug 'leafgarland/typescript-vim'
-Plug 'elzr/vim-json'
-Plug 'tpope/vim-haml'
+Plug 'sheerun/vim-polyglot'
 
 " Productivity
 Plug 'Shougo/unite.vim'
@@ -31,12 +22,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
 Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
-Plug 'shougo/vimfiler.vim'
 
 call plug#end()
 
@@ -56,29 +48,18 @@ map <leader>ln :setlocal number!<CR>
 map <leader>gg :GitGutterToggle<CR>
 map <leader>w :set wrap!<CR>
 map <leader>z  :Goyo<CR>
-map <silent><C-n> :VimFilerExplorer 
-      \ -direction=botright -split -split-action=left<CR>
+map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
 nnoremap <F2> :tabm -1<CR>
 nnoremap <F3> :tabm +1<CR>
 
 " vim-json
 let g:vim_json_syntax_conceal = 0
 
-" vimfiler
-call vimfiler#custom#profile('default', 'context', {
-  \ 'safe': 0,
-  \ 'edit_action': 'open',
-  \ })
-
-let g:vimfiler_ignore_pattern = ['^\.git$', '\.pyc$', '^\.']
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-let g:vimfiler_readonly_file_icon = ''
-
-nnoremap <silent><buffer><expr> t vimfiler#do_switch_action('tabopen')
+" NERDTree
+let g:nerdtree_tabs_focus_on_files = 0
+let g:nerdtree_tabs_meaningful_tab_names = 1
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
 
 " Goyo
 function s:goyo_enter()
@@ -121,9 +102,13 @@ if executable('ag')
   " Use ag (the silver searcher)
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts =
-  \ '-i --color --vimgrep --hidden --ignore ' .
-  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    \ '-i --color --vimgrep --hidden --ignore ' .
+    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
   let g:unite_source_grep_recursive_opt = ''
+
+  let g:unite_source_rec_async_command =
+    \ ['ag', '--follow', '--vimgrep', '--nocolor', '--nogroup',
+    \  '--hidden', '-g', '']
 endif
 
 let g:unite_prompt = "» "
@@ -131,7 +116,7 @@ let g:unite_source_line_enable_highlight = 1
 call unite#custom#source('file,file/new,buffer,file_rec/async', 
       \ 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
 call unite#custom#source('file,file/new,buffer,file_rec/async',
-      \ 'sorters', 'sorter_selecta')
+      \ 'sorters', ['sorter_length'])
 
 call unite#custom#profile('default', 'context', {
       \ 'direction': 'belowright' 
