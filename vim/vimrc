@@ -52,14 +52,14 @@ map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
 nnoremap <F2> :tabm -1<CR>
 nnoremap <F3> :tabm +1<CR>
 
-" vim-json
-let g:vim_json_syntax_conceal = 0
-
 " NERDTree
 let g:nerdtree_tabs_focus_on_files = 0
 let g:nerdtree_tabs_meaningful_tab_names = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
+
+" polyglot config
+let g:polyglot_disable = ['json']
 
 " Goyo
 function s:goyo_enter()
@@ -135,11 +135,13 @@ nnoremap <C-b> :<C-u>Unite buffer
       \ -start-insert -buffer-name=Buffer<CR>
 
 " gruvbox
-let g:gruvbox_italic = 1
-let g:gruvbox_italicize_comments = 1
+if $TERM !~ 'screen-256color'
+  let g:gruvbox_italic = 1
+  let g:gruvbox_italicize_comments = 1
+endif
 let g:gruvbox_invert_selection = 0
-let g:gruvbox_contrast_dark = "medium"
-let g:gruvbox_contrast_light = "soft"
+let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_light = "medium"
 set bg=dark
 colorscheme gruvbox
 
@@ -215,7 +217,7 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 set guioptions-=e
-set guifont=Inconsolata\ 12
+set guifont=Inconsolata\ 13
 
 " Vertical diff
 set diffopt+=vertical
