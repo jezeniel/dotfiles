@@ -3,39 +3,34 @@ call plug#begin('~/.vim/plugged')
 
 " Theme
 Plug 'morhetz/gruvbox'
-Plug 'zeis/vim-kolor'
-Plug 'whatyouhide/vim-gotham'
-Plug 'kristijanhusak/vim-hybrid-material'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
 
 " Productivity
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
-Plug 'junegunn/goyo.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
 
 call plug#end()
 
 syntax on
-set history=700
+set history=100
 set autoread
-set noshowmode
 
 " Turn of wordwrap by default
 set nowrap
@@ -43,102 +38,54 @@ set nowrap
 " custom key mappings
 let mapleader = ","
 let g:mapleader = ","
-map <leader>ss :setlocal spell!<CR>
-map <leader>ln :setlocal number!<CR>
-map <leader>gg :GitGutterToggle<CR>
-map <leader>w :set wrap!<CR>
-map <leader>z  :Goyo<CR>
 map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
-nnoremap <F2> :tabm -1<CR>
-nnoremap <F3> :tabm +1<CR>
 
 " NERDTree
 let g:nerdtree_tabs_focus_on_files = 0
-let g:nerdtree_tabs_meaningful_tab_names = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
-
-" polyglot config
-let g:polyglot_disable = ['json']
-
-" Goyo
-function s:goyo_enter()
-  silent !tmux set status off
-  LeadingSpaceDisable
-endfunction
-
-function s:goyo_leave()
-  silent !tmux set status on
-  LeadingSpaceEnable
-endfunction
-
-autocmd User GoyoEnter nested call <SID>goyo_enter()
-autocmd User GoyoLeave nested call <SID>goyo_leave()
 
 " indentLine
 let g:indentLine_enabled = 0
 let g:indentLine_leadingSpaceChar = '∙'
 let g:indentLine_leadingSpaceEnabled = 1
-set lcs=eol:¬,tab:»∙,trail:∙
+set lcs=eol:¬,tab:»»,trail:∙
 set list
+
+
+" notes
+let g:notes_directories  = ['~/Documents/Notes', '~/Dropbox/Notes']
+let g:notes_conceal_code = 0
+let g:notes_conceal_italic = 0
+let g:notes_conceal_bold = 0
+
+" syntastic
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers = ['flake8']
 
 " Tab management
 map <leader>tn :tabnew<CR>
 
-" GitGutter
-nmap gh <Plug>GitGutterNextHunk
-nmap gH <Plug>GitGutterPrevHunk
-let g:gitgutter_sign_removed = "-"
-
 " Easymotion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-s)
+nmap <s> <Plug>(easymotion-s)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
-" Unite
-if executable('ag')
-  " Use ag (the silver searcher)
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-    \ '-i --color --vimgrep --hidden --ignore ' .
-    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
+" FZF 
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
-  let g:unite_source_rec_async_command =
-    \ ['ag', '--follow', '--vimgrep', '--nocolor', '--nogroup',
-    \  '--hidden', '-g', '']
-endif
+let g:fzf_layout = { 'down': '40%' }
 
-let g:unite_prompt = "» "
-let g:unite_source_line_enable_highlight = 1
-call unite#custom#source('file,file/new,buffer,file_rec/async', 
-      \ 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
-call unite#custom#source('file,file/new,buffer,file_rec/async',
-      \ 'sorters', ['sorter_length'])
-
-call unite#custom#profile('default', 'context', {
-      \ 'direction': 'belowright' 
-      \ })
-
-nnoremap <leader>/ :<C-u>Unite 
-      \ -auto-highlight grep:!<CR>
-
-nnoremap <C-p> :<C-u>Unite file_rec/async:!
-      \ -start-insert -buffer-name=Search<CR>
-
-nnoremap <C-P> :<C-u>Unite file_rec/async:?!
-      \ -start-insert -buffer-name=Search<CR>
-
-nnoremap <C-b> :<C-u>Unite buffer
-      \ -start-insert -buffer-name=Buffer<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
+nnoremap <silent> <C-t> :Ag<CR>
 
 " gruvbox
-if $TERM !~ 'screen-256color'
-  let g:gruvbox_italic = 1
-  let g:gruvbox_italicize_comments = 1
-endif
 let g:gruvbox_invert_selection = 0
 let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_contrast_light = "medium"
@@ -150,19 +97,12 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 set laststatus=2
+set noshowmode
 
-" markdown
-let g:vim_markdown_folding_disabled=1
-
-highlight CursorLine cterm=bold
 set colorcolumn=80
 
 " Line numbering
 set number
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
 
 " 1 tab == 2 spaces
 " set smarttab
@@ -172,19 +112,8 @@ set shiftwidth=2
 " Use spaces instead of tabs
 set expandtab
 
-set ai " Auto indent
-" set si " Smart indent
-
-set wildmenu
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-  set wildignore+=.git\*,.hg\*,.svn\*
-endif
-
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+set autoindent " Auto indent
+set smartindent " Smart indent
 
 " Disable backup
 set nobackup
@@ -202,23 +131,3 @@ set incsearch
 
 set ruler
 set magic
-
-" let g:Powerline_symbols = 'fancy'
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_python_checkers = ['flake8']
-let g:gitgutter_map_keys = 1
-
-" vim-session
-let g:session_autosave='no'
-
-"Remove GVIM GUI
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
-set guioptions-=e
-set guifont=Inconsolata\ 13
-
-" Vertical diff
-set diffopt+=vertical
-
