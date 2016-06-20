@@ -3,6 +3,9 @@
 bspc config border_width        2
 bspc config top_padding        15
 bspc config window_gap          8
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc config merge_overlapping_monitors true
 
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
@@ -10,14 +13,8 @@ bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
+bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9
 
-bspc rule -a Gimp desktop=^8 follow=on floating=on
-bspc rule -a Chromium desktop=^2
-bspc rule -a mplayer2 floating=on
-bspc rule -a Kupfer.py focus=on
-wspc rule -a Screenkey manage=off
-
-feh --bg-scale $HOME/Pictures/hidden.jpg &
-compton -b
-
-panel &
+sxhkd &
+feh --bg-scale $HOME/Pictures/observer.jpg &
+/home/jezeniel/.local/bin/panel &
