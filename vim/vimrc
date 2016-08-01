@@ -3,13 +3,14 @@ call plug#begin('~/.vim/plugged')
 
 " Theme
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 
 " Syntax
-Plug 'sheerun/vim-polyglot'
+Plug 'hdima/python-syntax'
 
 " Productivity
 Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
@@ -22,8 +23,6 @@ Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
 
 
 call plug#end()
@@ -52,13 +51,6 @@ let g:indentLine_leadingSpaceEnabled = 1
 set lcs=eol:¬,tab:»»,trail:∙
 set list
 
-
-" notes
-let g:notes_directories  = ['~/Documents/Notes', '~/Dropbox/Notes']
-let g:notes_conceal_code = 0
-let g:notes_conceal_italic = 0
-let g:notes_conceal_bold = 0
-
 " syntastic
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_python_checkers = ['flake8']
@@ -69,40 +61,39 @@ map <leader>tn :tabnew<CR>
 " Easymotion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-nmap <s> <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
-" FZF 
+" FZF
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
 
 let g:fzf_layout = { 'down': '40%' }
+let g:fzf_launcher = 'urxvt -geometry 80x30 -e sh -c %s'
 
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-t> :Ag<CR>
 
-" gruvbox
-let g:gruvbox_invert_selection = 0
-let g:gruvbox_contrast_dark = "medium"
-let g:gruvbox_contrast_light = "medium"
+" paper color
 set bg=dark
-colorscheme gruvbox
-
-" airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-set laststatus=2
-set noshowmode
+let base16colorspace=256
+colorscheme base16-default-dark
 
 set colorcolumn=80
 
 " Line numbering
 set number
+
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
+set laststatus=2
+set noshowmode
 
 " 1 tab == 2 spaces
 " set smarttab
@@ -131,3 +122,9 @@ set incsearch
 
 set ruler
 set magic
+
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+set guioptions-=e
