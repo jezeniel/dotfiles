@@ -3,11 +3,12 @@ call plug#begin('~/.vim/plugged')
 
 " Theme
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Syntax
 Plug 'hdima/python-syntax'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Productivity
 Plug 'airblade/vim-gitgutter'
@@ -15,14 +16,16 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdcommenter'
+Plug 'justinmk/vim-gtfo'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'Yggdroot/indentLine'
+Plug 'machakann/vim-sandwich'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Misc
+Plug 'metakirby5/codi.vim'
 
 
 call plug#end()
@@ -31,23 +34,34 @@ syntax on
 set history=100
 set autoread
 
+
 " Turn of wordwrap by default
 set nowrap
 
 " custom key mappings
-let mapleader = ","
-let g:mapleader = ","
-map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+nnoremap <leader>w :w<CR>
+
+" GTFO
+let g:gtfo#terminals = { 'unix': 'urxvt -cd' }
+
+" Sandwich
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
+let g:textobj_sandwich_no_default_key_mappings = 1
+map <leader>e <Plug>(operator-sandwich-add)
+map <leader>ed <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+map <leader>er <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+
 
 " NERDTree
 let g:nerdtree_tabs_focus_on_files = 0
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
+map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
 
-" indentLine
-let g:indentLine_enabled = 0
-let g:indentLine_leadingSpaceChar = '∙'
-let g:indentLine_leadingSpaceEnabled = 1
+" Trailing whitespace guide
 set lcs=eol:¬,tab:»»,trail:∙
 set list
 
@@ -65,6 +79,15 @@ nmap s <Plug>(easymotion-s)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
+" remove hl navigation
+noremap h <NOP>
+noremap l <NOP>
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " FZF
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
@@ -78,22 +101,20 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-t> :Ag<CR>
 
-" paper color
+" colorscheme
 set bg=dark
-let base16colorspace=256
-colorscheme base16-default-dark
+colorscheme gruvbox
 
+" airline
+set laststatus=2
+set noshowmode
+let g:airline_powerline_fonts=1
+
+" Code guide for more than 80 characters
 set colorcolumn=80
 
 " Line numbering
 set number
-
-" lightline
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
-set laststatus=2
-set noshowmode
 
 " 1 tab == 2 spaces
 " set smarttab
@@ -112,8 +133,6 @@ set nowb
 set noswapfile
 
 set hidden
-
-set lazyredraw
 
 set ignorecase
 set smartcase
