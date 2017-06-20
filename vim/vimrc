@@ -8,7 +8,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Syntax
 Plug 'hdima/python-syntax'
-Plug 'nathanaelkane/vim-indent-guides'
 
 " Productivity
 Plug 'airblade/vim-gitgutter'
@@ -16,13 +15,14 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'justinmk/vim-gtfo'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'machakann/vim-sandwich'
+Plug 'benmills/vimux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'kana/vim-arpeggio'
 
 " Misc
 Plug 'metakirby5/codi.vim'
@@ -52,9 +52,9 @@ let g:gtfo#terminals = { 'unix': 'urxvt -cd' }
 let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
-map <leader>e <Plug>(operator-sandwich-add)
-map <leader>ed <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-map <leader>er <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+map <leader>s <Plug>(operator-sandwich-add)
+map <leader>d <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+map <leader>r <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 
 
 " NERDTree
@@ -89,6 +89,12 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" vimux
+let g:arpeggio_timeoutlens = { 'v': 40 }
+call arpeggio#map('ni', '', 0, 'vp', '<ESC>:VimuxPromptCommand<CR>')
+call arpeggio#map('ni', '', 0, 'vl', '<ESC>:VimuxRunLastCommand<CR>')
+call arpeggio#map('ni', '', 0, 'vz', '<ESC>:VimuxZoomRunner<CR>')
 
 " FZF
 let g:fzf_action = {
@@ -149,3 +155,6 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 set guioptions-=e
+
+" Clipboard
+set clipboard=unnamedplus
