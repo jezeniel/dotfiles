@@ -1,4 +1,5 @@
 set encoding=utf-8
+set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " Theme
@@ -14,7 +15,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'gregsexton/MatchTag'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
@@ -22,11 +23,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'benmills/vimux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'kana/vim-arpeggio'
-
-" Misc
-Plug 'metakirby5/codi.vim'
-
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
@@ -52,16 +49,20 @@ let g:gtfo#terminals = { 'unix': 'urxvt -cd' }
 let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
-map <leader>s <Plug>(operator-sandwich-add)
-map <leader>d <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-map <leader>r <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+runtime macros/sandwich/keymap/surround.vim
+
+" YCM
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+map <leader>gd :YcmCompleter GoToDefinition<CR>
+map <leader>gl :YcmCompleter GoToDeclaration<CR>
 
 
 " NERDTree
-let g:nerdtree_tabs_focus_on_files = 0
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$']
-map <silent><C-n> <Plug>NERDTreeTabsToggle<CR>
+let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$', '__pycache__']
+map <C-n> :NERDTreeToggle<CR>
 
 " Trailing whitespace guide
 set lcs=eol:¬,tab:»»,trail:∙
@@ -90,28 +91,43 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" vimux
-let g:arpeggio_timeoutlens = { 'v': 40 }
-call arpeggio#map('ni', '', 0, 'vp', '<ESC>:VimuxPromptCommand<CR>')
-call arpeggio#map('ni', '', 0, 'vl', '<ESC>:VimuxRunLastCommand<CR>')
-call arpeggio#map('ni', '', 0, 'vz', '<ESC>:VimuxZoomRunner<CR>')
+" buffer navigation
+noremap <silent> <leader>] :bn<CR>
+noremap <silent> <leader>[ :bp<CR>
 
 " FZF
 let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
-
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_launcher = 'urxvt -geometry 80x30 -e sh -c %s'
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-b> :Buffers<CR>
-nnoremap <silent> <C-t> :Ag<CR>
+nnoremap <silent> <Leader><Leader> :Files<CR>
+nnoremap <silent> <Leader><Enter> :Buffers<CR>
+nnoremap <silent> <Leader>` :Marks<CR>
+nnoremap <silent> <Leader>t :Ag<CR>
+nnoremap <silent> <Leader>l :Lines<CR>
+
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+
 
 " colorscheme
 set bg=dark
 colorscheme gruvbox
+
 
 " airline
 set laststatus=2
@@ -119,7 +135,7 @@ set noshowmode
 let g:airline_powerline_fonts=1
 
 " Code guide for more than 80 characters
-set colorcolumn=80
+set colorcolumn=100
 
 " Line numbering
 set number
