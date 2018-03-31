@@ -6,11 +6,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
 
 " Syntax
 Plug 'hdima/python-syntax'
 
+" Docs
+Plug 'mzlogin/vim-markdown-toc'
+
 " Productivity
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
@@ -55,8 +62,31 @@ runtime macros/sandwich/keymap/surround.vim
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-map <leader>gd :YcmCompleter GoToDefinition<CR>
-map <leader>gl :YcmCompleter GoToDeclaration<CR>
+map <leader>d :YcmCompleter GoToDefinition<CR>
+map <leader>g :YcmCompleter GoToDeclaration<CR>
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" NERDCommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Vimux
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
 
 
 " NERDTree
@@ -65,10 +95,10 @@ let g:NERDTreeIgnore = ['\.pyc$','\.rpyc$', '__pycache__']
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeCascadeSingleChildDir = 0
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeTabsToggle<CR>
 
 " Trailing whitespace guide
-set lcs=eol:¬,tab:»»,trail:∙
+set lcs=eol:¬,tab:▶\ ,trail:∙
 set list
 
 " syntastic
@@ -120,23 +150,26 @@ nnoremap <silent> <Leader><Enter> :Buffers<CR>
 nnoremap <silent> <Leader>` :Marks<CR>
 nnoremap <silent> <Leader>t :Ag<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
-
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 
 " colorscheme
 set bg=dark
-let g:gruvbox_contrast_dark='medium'
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark='medium'
+" colorscheme gruvbox
+colorscheme solarized
 
 
 " airline
 set laststatus=2
 set noshowmode
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " Code guide for more than 80 characters
-set colorcolumn=100
+set colorcolumn=79
 
 " Line numbering
 set number
@@ -174,4 +207,8 @@ set guioptions-=L
 set guioptions-=e
 
 " Clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
+set backspace=indent,eol,start
+
+" Custom functions
+command FormatJson execute "%! python -m json.tool"
