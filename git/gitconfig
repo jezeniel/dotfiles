@@ -1,0 +1,8 @@
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+[user]
+	email = jezeniel.zapanta@gmail.com
+	name = Jezeniel Zapanta

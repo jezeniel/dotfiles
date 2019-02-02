@@ -6,31 +6,24 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
-
-" Syntax
-Plug 'hdima/python-syntax'
-
-" Docs
-Plug 'mzlogin/vim-markdown-toc'
 
 " Productivity
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'gregsexton/MatchTag'
-Plug 'vim-scripts/matchit.zip'
-Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
-Plug 'tpope/vim-fugitive'
-Plug 'machakann/vim-sandwich'
-Plug 'benmills/vimux'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Valloric/YouCompleteMe'
+Plug 'machakann/vim-sandwich'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/matchit.zip'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -49,21 +42,11 @@ let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 nnoremap <leader>w :w<CR>
 
-" GTFO
-let g:gtfo#terminals = { 'unix': 'urxvt -cd' }
-
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
 runtime macros/sandwich/keymap/surround.vim
-
-" YCM
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-map <leader>d :YcmCompleter GoToDefinition<CR>
-map <leader>g :YcmCompleter GoToDeclaration<CR>
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -130,7 +113,6 @@ let g:fzf_action = {
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'down': '40%' }
-let g:fzf_launcher = 'urxvt -geometry 80x30 -e sh -c %s'
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -157,9 +139,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : 
 
 " colorscheme
 set bg=dark
-" let g:gruvbox_contrast_dark='medium'
-" colorscheme gruvbox
-colorscheme solarized
+colorscheme gruvbox
 
 
 " airline
