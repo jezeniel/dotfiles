@@ -23,7 +23,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/matchit.zip'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -47,6 +48,9 @@ let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
 runtime macros/sandwich/keymap/surround.vim
+
+" Ale
+let g:ale_echo_cursor = 0
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -130,11 +134,17 @@ let g:fzf_colors =
 nnoremap <silent> <Leader><Leader> :Files<CR>
 nnoremap <silent> <Leader><Enter> :Buffers<CR>
 nnoremap <silent> <Leader>` :Marks<CR>
-nnoremap <silent> <Leader>t :Ag<CR>
+nnoremap <silent> <Leader>t :Rg<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 
 " colorscheme
