@@ -6,3 +6,5 @@
 [user]
 	email = jezeniel.zapanta@gmail.com
 	name = Jezeniel Zapanta
+[core]
+	editor = vim
