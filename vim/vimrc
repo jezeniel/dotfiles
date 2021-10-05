@@ -8,12 +8,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Productivity
+Plug 'fisadev/vim-isort'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'andymass/vim-matchup'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -22,6 +23,9 @@ Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
+Plug 'preservim/nerdtree'
+Plug 'psf/black'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 call plug#end()
 
@@ -52,6 +56,10 @@ let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
+
+"NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = 'right'
 
 " buffer navigation
 noremap <silent> <leader>] :bn<CR>
@@ -84,9 +92,7 @@ nnoremap <silent> <Leader>l :Lines<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'},
   \   <bang>0)
 
 " Enable true color
@@ -163,3 +169,6 @@ set backspace=indent,eol,start
 
 " Custom functions
 command FormatJson execute "%! python -m json.tool"
+
+" Black
+autocmd BufWritePre *.py execute ':Black'
