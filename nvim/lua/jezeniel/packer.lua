@@ -6,6 +6,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'nvim-lua/plenary.nvim'
 
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -38,6 +39,20 @@ return require('packer').startup(function(use)
           {'hrsh7th/cmp-nvim-lsp'},
           {'L3MON4D3/LuaSnip'},
       }
+  }
+
+  use {
+      'kylechui/nvim-surround',
+      tag = '*',
+      config = function()
+          require('nvim-surround').setup({})
+      end
+  }
+
+  use {
+      'ThePrimeagen/harpoon',
+      branch = 'harpoon2',
+      dependencies = { 'nvim-lua/plenary-vim' }
   }
 
 end)
