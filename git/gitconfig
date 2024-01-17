@@ -8,3 +8,5 @@
 	name = Jezeniel Zapanta
 [core]
 	editor = vim
+[init]
+	defaultBranch = main
