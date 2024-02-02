@@ -42,6 +42,7 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 	use("stevearc/conform.nvim")
 
 	use({
@@ -51,19 +52,18 @@ return require("packer").startup(function(use)
 			require("nvim-surround").setup({})
 		end,
 	})
-
+	use({ "tpope/vim-fugitive" })
 	use({
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary-vim" },
 	})
-
 	use("alexghergh/nvim-tmux-navigation")
-
 	use({
 		"aserowy/tmux.nvim",
 		config = function()
 			return require("tmux").setup()
 		end,
 	})
+	use({ "tpope/vim-endwise" })
 end)

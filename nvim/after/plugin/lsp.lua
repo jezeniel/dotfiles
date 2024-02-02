@@ -10,7 +10,7 @@ end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "pyright", "eslint" },
+	ensure_installed = { "lua_ls", "pyright", "eslint", "gopls"},
 	handlers = {
 		lsp.default_setup,
 	},
