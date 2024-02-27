@@ -10,12 +10,17 @@ end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "pyright", "eslint", "gopls"},
+	ensure_installed = { "lua_ls", "pyright", "eslint", "gopls" },
 	handlers = {
 		lsp.default_setup,
 	},
 })
 
+require("nvim-navic").setup({
+	lsp = {
+		auto_attach = true,
+	},
+})
 require("lspconfig").lua_ls.setup({
 	on_init = function(client)
 		local path = client.workspace_folders[1].name

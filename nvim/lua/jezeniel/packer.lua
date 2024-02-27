@@ -21,6 +21,8 @@ return require("packer").startup(function(use)
 
 	use("mbbill/undotree")
 
+	use("nvim-lualine/lualine.nvim")
+
 	use("nvim-tree/nvim-web-devicons")
 	use("nvim-tree/nvim-tree.lua")
 	use("romgrk/barbar.nvim")
@@ -41,6 +43,7 @@ return require("packer").startup(function(use)
 			{ "L3MON4D3/LuaSnip" },
 		},
 	})
+	use({ "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" })
 
 	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 	use("stevearc/conform.nvim")
