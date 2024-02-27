@@ -24,7 +24,7 @@ conform.setup({
 
 vim.api.nvim_create_user_command("Format", function(args)
 	conform.format({ bufnr = args.buf })
-end)
+end, {})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
