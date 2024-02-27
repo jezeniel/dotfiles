@@ -1,9 +1,5 @@
 local lsp = require("lsp-zero")
 
-vim.api.nvim_create_user_command("Format", function()
-	vim.lsp.buf.format()
-end, {})
-
 lsp.on_attach(function(client, bufnr)
 	lsp.default_keymaps({ buffer = bufnr })
 end)

@@ -12,14 +12,19 @@ installer.setup({
 
 conform.setup({
 	formatters_by_ft = {
-		python = { "isort", "black" },
-		html = { "prettier" },
 		css = { "prettier" },
-		javascript = { "prettier" },
-		lua = { "stylua" },
 		go = { "gofumpt" },
+		html = { "prettier" },
+		javascript = { "prettier" },
+		json = { "prettier" },
+		lua = { "stylua" },
+		python = { "isort", "black" },
 	},
 })
+
+vim.api.nvim_create_user_command("Format", function(args)
+	conform.format({ bufnr = args.buf })
+end)
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
