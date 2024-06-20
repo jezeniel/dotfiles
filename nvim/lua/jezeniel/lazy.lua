@@ -12,7 +12,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-return require("lazy").setup({
+require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 
 	{
@@ -40,17 +40,29 @@ return require("lazy").setup({
 	{ "nvim-tree/nvim-tree.lua" },
 	{ "romgrk/barbar.nvim" },
 
- {'williamboman/mason.nvim'},
-{'williamboman/mason-lspconfig.nvim'},
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/nvim-cmp" },
 	{ "L3MON4D3/LuaSnip" },
 
-	{ "SmiteshP/nvim-navic", dependencies = { "neovim/nvim-lspconfig" } },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
-	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+	{ "SmiteshP/nvim-navic", dependencies = { "neovim/nvim-lspconfig" } },
 	{ "stevearc/conform.nvim" },
 
 	{
@@ -80,4 +92,5 @@ return require("lazy").setup({
 
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-endwise" },
+	{ "tpope/vim-sleuth" },
 })
