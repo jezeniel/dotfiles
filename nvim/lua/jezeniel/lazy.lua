@@ -31,6 +31,12 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup({ enable = true })
+		end,
+	},
 
 	{ "mbbill/undotree" },
 	{ "nvim-lualine/lualine.nvim" },
@@ -58,8 +64,6 @@ require("lazy").setup({
 		},
 	},
 	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-
-	{ "SmiteshP/nvim-navic", dependencies = { "neovim/nvim-lspconfig" } },
 
 	{
 		"ThePrimeagen/harpoon",

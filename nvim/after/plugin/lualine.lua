@@ -6,4 +6,9 @@ require("lualine").setup({
 			navic_opts = nil,
 		},
 	},
+	sections = {
+		lualine_c = {
+			{ "filename", path = 1 },
+		},
+	},
 })
