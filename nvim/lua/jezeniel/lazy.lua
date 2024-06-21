@@ -26,6 +26,11 @@ require("lazy").setup({
 		name = "catppuccin",
 		priority = 1000,
 	},
+	{
+		"ellisonleao/gruvbox.nvim",
+		priority = 1000,
+		config = true,
+	},
 
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -97,6 +102,7 @@ require("lazy").setup({
 					animation = require("mini.indentscope").gen_animation.none(),
 					priority = 2,
 				},
+				symbol = "│",
 			})
 		end,
 	},
