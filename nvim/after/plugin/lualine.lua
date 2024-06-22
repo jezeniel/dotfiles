@@ -1,4 +1,7 @@
 require("lualine").setup({
+	options = {
+		theme = "eldritch",
+	},
 	winbar = {
 		lualine_c = {
 			"navic",

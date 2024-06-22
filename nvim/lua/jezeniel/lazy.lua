@@ -22,14 +22,10 @@ require("lazy").setup({
 	},
 
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"eldritch-theme/eldritch.nvim",
+		lazy = false,
 		priority = 1000,
-	},
-	{
-		"ellisonleao/gruvbox.nvim",
-		priority = 1000,
-		config = true,
+		opts = {},
 	},
 
 	{
@@ -46,8 +42,12 @@ require("lazy").setup({
 	{ "mbbill/undotree" },
 	{ "nvim-lualine/lualine.nvim" },
 
-	{ "nvim-tree/nvim-web-devicons" },
-	{ "nvim-tree/nvim-tree.lua" },
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	{ "romgrk/barbar.nvim" },
 
 	{ "williamboman/mason.nvim" },
