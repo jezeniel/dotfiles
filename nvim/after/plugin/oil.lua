@@ -14,8 +14,8 @@ require("oil").setup({
 })
 
 function OilCwd()
-	vim.cmd({ cmd = "Oil", args = { "--float", vim.fn.getcwd() } })
+	vim.cmd({ cmd = "Oil", args = { vim.fn.getcwd() } })
 end
 
-vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "_", OilCwd, { desc = "Open parent directory" })
