@@ -28,3 +28,5 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 
 vim.wo.wrap = false
+
+vim.keymap.set("v", "<leader>p", '"_dP')

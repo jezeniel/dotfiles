@@ -11,9 +11,9 @@ require("barbar").setup({
 
 vim.keymap.set("n", "<leader>.", "<Cmd>BufferNext<CR>", opts)
 vim.keymap.set("n", "<leader>,", "<Cmd>BufferPrevious<CR>", opts)
-
 vim.keymap.set("n", "<leader><", "<Cmd>BufferMovePrevious<CR>", opts)
 vim.keymap.set("n", "<leader>>", "<Cmd>BufferMoveNext<CR>", opts)
+
 vim.keymap.set("n", "<leader>c", "<Cmd>BufferClose<CR>", opts)
-vim.keymap.set("n", "<leader>C", "<Cmd>BufferCloseAllButPinned<CR>", opts)
-vim.keymap.set("n", "<leader>p", "<Cmd>BufferPin<CR>", opts)
+vim.keymap.set("n", "<leader>C", "<Cmd>BufferCloseAllButCurrentOrPinned<CR>", opts)
+vim.keymap.set("n", "<leader>bp", "<Cmd>BufferPin<CR>", opts)
