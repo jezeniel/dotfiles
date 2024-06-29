@@ -1,2 +1,0 @@
-vim.g.undotree_SplitWidth = 30
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
