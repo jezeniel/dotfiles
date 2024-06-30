@@ -17,8 +17,8 @@ return {
 		vim.keymap.set("n", "<leader><", "<Cmd>BufferMovePrevious<CR>", opts)
 		vim.keymap.set("n", "<leader>>", "<Cmd>BufferMoveNext<CR>", opts)
 
-		vim.keymap.set("n", "<leader>x", "<Cmd>BufferClose<CR>", opts)
-		vim.keymap.set("n", "<leader>X", "<Cmd>BufferCloseAllButCurrentOrPinned<CR>", opts)
+		vim.keymap.set("n", "<leader>bd", "<Cmd>BufferClose<CR>", opts)
+		vim.keymap.set("n", "<leader>bD", "<Cmd>BufferCloseAllButCurrentOrPinned<CR>", opts)
 		vim.keymap.set("n", "<leader>bp", "<Cmd>BufferPin<CR>", opts)
 	end,
 }
