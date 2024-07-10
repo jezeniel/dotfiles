@@ -1,6 +1,5 @@
 return {
 	{ "nvim-lua/plenary.nvim" },
-	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-sleuth" },
 
 	{
@@ -12,14 +11,8 @@ return {
 			},
 		},
 	},
+	{ "new plugin" },
 	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-
-	{
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
-	},
 
 	{
 		"andymass/vim-matchup",
