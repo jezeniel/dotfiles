@@ -2,6 +2,6 @@ return {
 	"mbbill/undotree",
 	config = function()
 		vim.g.undotree_SplitWidth = 30
-		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "UndotreeToggle" })
 	end,
 }

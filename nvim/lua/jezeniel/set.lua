@@ -19,6 +19,8 @@ vim.opt.mouse = "a"
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
@@ -27,7 +29,16 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.scrolloff = 5
+
+vim.opt.showmode = false
+
 vim.wo.wrap = false
 
 vim.keymap.set("v", "<leader>p", '"_dP')
-vim.keymap.set("n", "<leader>w", "<CMD>:w<CR>")
+vim.keymap.set("n", "<leader>w", "<CMD>:w<CR>", { desc = "[w]rite file" })
