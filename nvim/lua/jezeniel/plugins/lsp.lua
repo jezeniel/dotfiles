@@ -18,8 +18,11 @@ return {
 		local lsp = require("lsp-zero")
 
 		lsp.on_attach(function(_, bufnr)
-			lsp.default_keymaps({ buffer = bufnr })
+			lsp.default_keymaps({ buffer = bufnr, exclude = { "gr", "gd", "gD" } })
 		end)
+
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[g]oto [d]efinition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "[g]oto [D]eclaration" })
 
 		local servers = {
 			lua_ls = {

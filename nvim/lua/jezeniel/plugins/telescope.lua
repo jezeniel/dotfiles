@@ -23,6 +23,7 @@ return {
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp [r]eferences" })
 		vim.keymap.set("n", "<leader>fc", builtin.resume, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[h]elp tags" })
+		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[o]ld files" })
 		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "find files" })
 	end,
 }
