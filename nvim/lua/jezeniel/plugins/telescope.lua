@@ -20,10 +20,11 @@ return {
 		vim.keymap.set("n", "<leader>ff", builtin.git_files, { desc = "git [f]iles" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]rep" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[b]uffers" })
-		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp [r]eferences" })
 		vim.keymap.set("n", "<leader>fc", builtin.resume, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[h]elp tags" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[o]ld files" })
 		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "find files" })
+		vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[g]o to [d]efinition" })
+		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[g]o to [r]eferences" })
 	end,
 }

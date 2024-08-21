@@ -28,10 +28,5 @@ return {
 			"<cmd>Trouble qflist toggle<cr>",
 			desc = "Quickfix List (Trouble)",
 		},
-		{
-			"gr",
-			"<cmd>Trouble lsp_references focus=true win.position=bottom<cr>",
-			desc = "[g]oto [r]eferences (Trouble)",
-		},
 	},
 }
