@@ -13,5 +13,8 @@ return {
 			},
 			symbol = "│",
 		})
+
+		local misc = require("mini.misc")
+		vim.keymap.set("n", "<leader>bf", misc.zoom, { desc = "[f]ullscreen" })
 	end,
 }

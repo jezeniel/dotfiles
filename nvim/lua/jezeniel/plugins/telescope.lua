@@ -24,6 +24,10 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[h]elp tags" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[o]ld files" })
 		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "find files" })
+
+		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[b]ranches" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
+
 		vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[g]o to [d]efinition" })
 		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[g]o to [r]eferences" })
 	end,
