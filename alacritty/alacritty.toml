@@ -1,0 +1,13 @@
+import = [
+    "~/.config/alacritty/themes/tokyonight_moon.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+normal.family = "JetbrainsMonoNL Nerd Font"
+bold.family = "JetbrainsMonoNL Nerd Font"
+italic.family = "JetbrainsMonoNL Nerd Font"
+bold_italic.family = "JetbrainsMonoNL Nerd Font"
+size = 13

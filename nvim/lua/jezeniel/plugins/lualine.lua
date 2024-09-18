@@ -3,7 +3,7 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = "eldritch",
+				theme = "tokyonight",
 			},
 			sections = {
 				lualine_b = {

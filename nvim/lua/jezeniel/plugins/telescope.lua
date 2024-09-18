@@ -17,12 +17,23 @@ return {
 			},
 		})
 
+		local function live_grep_current_file()
+			local current_file = vim.fn.expand("%:p")
+			builtin.live_grep({
+				grep_open_files = true,
+				prompt_title = "Live Grep (Current File)",
+				search_dirs = { current_file },
+				default_text = "",
+			})
+		end
+
 		vim.keymap.set("n", "<leader>ff", builtin.git_files, { desc = "git [f]iles" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]rep" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[b]uffers" })
 		vim.keymap.set("n", "<leader>fc", builtin.resume, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[h]elp tags" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[o]ld files" })
+		vim.keymap.set("n", "<leader>/", live_grep_current_file, { desc = "[/] find current buffer" })
 		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "find files" })
 
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[b]ranches" })

@@ -14,6 +14,7 @@ return {
 					"black",
 					"gofumpt",
 					"prettier",
+					"mypy",
 				},
 			})
 
@@ -23,9 +24,9 @@ return {
 					go = { "gofumpt" },
 					html = { "prettier" },
 					javascript = { "prettier" },
-					json = { "prettier" },
+					-- json = { "prettier" },
 					lua = { "stylua" },
-					python = { "isort", "black" },
+					python = { "isort", "black", "mypy" },
 				},
 			})
 
