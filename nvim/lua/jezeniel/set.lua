@@ -42,3 +42,5 @@ vim.wo.wrap = false
 
 vim.keymap.set("v", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>w", "<CMD>:w<CR>", { desc = "[w]rite file" })
+
+vim.cmd.colorscheme("eldritch")
