@@ -1,9 +1,6 @@
-[general]
 import = [
     "~/.config/alacritty/themes/tokyonight_moon.toml"
 ]
-
-[terminal]
 shell = "/usr/bin/fish"
 
 [env]
