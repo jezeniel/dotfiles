@@ -5,7 +5,10 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
-		"L3MON4D3/LuaSnip",
+		{
+			"L3MON4D3/LuaSnip",
+			build = "make install_jsregexp",
+		},
 		"j-hui/fidget.nvim",
 
 		"hrsh7th/nvim-cmp",

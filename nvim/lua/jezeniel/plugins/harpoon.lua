@@ -15,18 +15,11 @@ return {
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end)
 
-		vim.keymap.set("n", "<M-1>", function()
-			harpoon:list():select(1)
-		end, { desc = "Harpoon [1]" })
-		vim.keymap.set("n", "<M-2>", function()
-			harpoon:list():select(2)
-		end, { desc = "Harpoon [2]" })
-		vim.keymap.set("n", "<M-3>", function()
-			harpoon:list():select(3)
-		end, { desc = "Harpoon [3]" })
-		vim.keymap.set("n", "<M-4>", function()
-			harpoon:list():select(4)
-		end, { desc = "Harpoon [4]" })
+		for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+			vim.keymap.set("n", string.format("<leader>%d", idx), function()
+				harpoon:list():select(idx)
+			end, { desc = string.format("Harpoon [%d]", idx) })
+		end
 
 		-- Toggle previous & next buffers stored within Harpoon list
 		vim.keymap.set("n", "<M-p>", function()
