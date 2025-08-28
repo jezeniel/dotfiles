@@ -59,12 +59,13 @@ return {
 					return true
 				end,
 			},
-			basedpyright = {
+			pyright = {
 				settings = {
-					basedpyright = {
-						analysis = {
-							autoImportCompletions = true,
-							typeCheckingMode = "standard",
+					yaml = {
+						schemas = {
+							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/edb.schema.json"] = "*.edb",
+							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/aap.schema.json"] = "*.aap",
+							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/system.schema.json"] = "*.system",
 						},
 					},
 				},
@@ -101,6 +102,11 @@ return {
 				["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			},
+		})
+
+		vim.diagnostic.config({
+			virtual_text = true,
+			-- virtual_lines = true,
 		})
 	end,
 }
