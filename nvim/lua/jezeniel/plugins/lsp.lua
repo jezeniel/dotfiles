@@ -59,14 +59,11 @@ return {
 					return true
 				end,
 			},
-			pyright = {
+			pyright = {},
+			yamlls = {
 				settings = {
 					yaml = {
-						schemas = {
-							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/edb.schema.json"] = "*.edb",
-							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/aap.schema.json"] = "*.aap",
-							["/Users/jezeniel.zapanta/Development/apkudo-platform/json-schema/system.schema.json"] = "*.system",
-						},
+						schemas = {},
 					},
 				},
 			},
