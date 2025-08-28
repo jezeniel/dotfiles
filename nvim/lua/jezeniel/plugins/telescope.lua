@@ -27,14 +27,19 @@ return {
 			})
 		end
 
-		vim.keymap.set("n", "<leader>ff", builtin.git_files, { desc = "git [f]iles" })
+		vim.keymap.set("n", "<leader><leader>", function()
+			local ok = pcall(builtin.git_files)
+			if not ok then
+				builtin.find_files()
+			end
+		end, { desc = "find [f]iles" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]rep" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[b]uffers" })
 		vim.keymap.set("n", "<leader>fc", builtin.resume, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[h]elp tags" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[o]ld files" })
 		vim.keymap.set("n", "<leader>/", live_grep_current_file, { desc = "[/] find current buffer" })
-		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "find files" })
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
 
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[b]ranches" })
 		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
