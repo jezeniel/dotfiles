@@ -15,11 +15,13 @@ return {
 					"gofumpt",
 					"prettier",
 					"mypy",
+					"clang-format",
 				},
 			})
 
 			conform.setup({
 				formatters_by_ft = {
+					c = { "clang-format" },
 					css = { "prettier" },
 					go = { "gofumpt" },
 					html = { "prettier" },
