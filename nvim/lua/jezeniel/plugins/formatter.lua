@@ -24,7 +24,6 @@ return {
 					c = { "clang-format" },
 					css = { "prettier" },
 					go = { "gofumpt" },
-					html = { "prettier" },
 					javascript = { "prettier" },
 					-- json = { "prettier" },
 					lua = { "stylua" },

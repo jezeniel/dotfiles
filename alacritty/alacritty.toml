@@ -15,3 +15,11 @@ bold.family = "JetbrainsMonoNL Nerd Font"
 italic.family = "JetbrainsMonoNL Nerd Font"
 bold_italic.family = "JetbrainsMonoNL Nerd Font"
 size = 13
+
+[general]
+import = [
+    "~/.config/alacritty/themes/tokyonight_moon.toml"
+]
+
+[terminal]
+shell = "/opt/homebrew/bin/fish"
