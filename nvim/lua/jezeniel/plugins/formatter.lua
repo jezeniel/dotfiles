@@ -16,6 +16,7 @@ return {
 					"prettier",
 					"mypy",
 					"clang-format",
+					"djlint",
 				},
 			})
 
@@ -25,6 +26,7 @@ return {
 					css = { "prettier" },
 					go = { "gofumpt" },
 					javascript = { "prettier" },
+					htmldjango = { "djlint" },
 					-- json = { "prettier" },
 					lua = { "stylua" },
 					python = { "isort", "black", "mypy" },
